@@ -4,6 +4,7 @@ package com.workintech.s19d2.controller;
 import com.workintech.s19d2.entity.Account;
 import com.workintech.s19d2.service.AccountService;
 import com.workintech.s19d2.service.AccountServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,11 @@ public class AccountController {
 
     private AccountService accountService;
 
+
+    @Autowired
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @GetMapping
     public List<Account> getAccount(){

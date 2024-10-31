@@ -3,6 +3,7 @@ package com.workintech.s19d2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -34,15 +35,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-     return httpSecurity
+        return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/welcome/**").permitAll()
+                    auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/account/**").hasAnyAuthority("USER","ADMIN");
+                    auth.requestMatchers(HttpMethod.POST,"/account/**").hasAnyAuthority("ADMIN");
+                    auth.requestMatchers(HttpMethod.PUT,"/account/**").hasAnyAuthority("ADMIN");
+                    auth.requestMatchers(HttpMethod.DELETE,"/account/**").hasAnyAuthority("ADMIN")
+
                             .anyRequest().authenticated();
                 })
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
+
+
 
 }
