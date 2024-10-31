@@ -62,6 +62,9 @@ public class ResultAnalyzer implements TestWatcher, AfterAllCallback{
         json.put("taskId", taskId);
         json.put("userId", userId);
         sendTestResult(json.toString());
+
+
+
     }
 
     private void sendTestResult(String result) throws IOException {
