@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AuthenticationService {
@@ -35,16 +32,16 @@ public class AuthenticationService {
         }
 
         String encodedPassword=passwordEncoder.encode(password);
-       Optional <Role> userRole=roleRepository.findByAuthority("USER");
+       Optional <Role> userRole=roleRepository.findByAuthority("ADMIN");
 
-        Set<Role> roles = new HashSet<>();
+        List<Role> roles = new ArrayList<>();
         roles.add(userRole.get());
 
 
         Member member = new Member();
         member.setEmail(email);
         member.setPassword(encodedPassword);
-        member.setRoles((List<Role>) roles);
+        member.setRoles(roles);
 
 
        return  memberRepository.save(member);
@@ -63,7 +60,7 @@ public class AuthenticationService {
         Optional <Role> userRole=roleRepository.findByAuthority("ADMIN");
 
 
-        Set<Role> roles = new HashSet<>();
+        List<Role> roles = new ArrayList<>();
         roles.add(userRole.get());
 
         Member member = new Member();
