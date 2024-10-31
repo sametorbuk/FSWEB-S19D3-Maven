@@ -27,7 +27,7 @@ public class AuthenticationService {
     }
 
 
-    public Member register(String name , String email , String password){
+    public Member register(String email , String password){
         String encodedPassword=passwordEncoder.encode(password);
         Role userRole=roleRepository.findByAuthority("USER").get();
 
@@ -39,7 +39,7 @@ public class AuthenticationService {
         member.setEmail(email);
         member.setPassword(encodedPassword);
         member.setRoles((List<Role>) roles);
-        member.setName(name);
+
 
        return  memberRepository.save(member);
 

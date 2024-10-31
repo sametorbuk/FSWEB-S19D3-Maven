@@ -1,5 +1,6 @@
 package com.workintech.s19d2;
 
+import com.workintech.s19d2.dto.RegisterResponse;
 import com.workintech.s19d2.dto.RegistrationMember;
 import com.workintech.s19d2.entity.Account;
 import com.workintech.s19d2.entity.Member;
