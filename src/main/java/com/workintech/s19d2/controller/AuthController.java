@@ -27,7 +27,7 @@ public class AuthController {
     @PostMapping("/register")
     public RegisterResponse register(@RequestBody RegistrationMember registrationMember){
       Member member = authenticationService.register(registrationMember.email() , registrationMember.password());
-      return new RegisterResponse(member.getEmail(),"User successfully registered");
+      return new RegisterResponse(member.getEmail(),"kayıt başarılı bir şekilde gerçekleşti.");
     }
 
 
